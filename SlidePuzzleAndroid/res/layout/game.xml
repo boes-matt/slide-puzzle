@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titleFontSize"
+        android:text="@string/title" />
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+	    <TextView 
+	        android:id="@+id/moves"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/infoFontSize"
+	        android:text="@string/moves" />
+
+		<TextView 
+	        android:id="@+id/goal"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:textSize="@dimen/infoFontSize"
+	        android:text="@string/goal" />
+        
+    </RelativeLayout>
+    
+    <com.boes.slidepuzzle4.BoardView 
+        android:id="@+id/board"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="1" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+		
+        <Button
+            android:id="@+id/newPuzzle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+	        android:textSize="@dimen/infoFontSize"            
+            android:text="@string/newPuzzle" />
+        
+        <Button
+            android:id="@+id/solve"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+	        android:textSize="@dimen/infoFontSize"
+            android:text="@string/solve" />
+        
+        <Button
+            android:id="@+id/skipAhead"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/infoFontSize"
+            android:text="@string/skipAhead" />
+        
+    </LinearLayout>
+    
+</LinearLayout>

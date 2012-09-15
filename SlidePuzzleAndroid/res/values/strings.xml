@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SlidePuzzle4</string>
+    <string name="title">Matts Slide Puzzle</string>  
+    
+    <string name="moves">Moves:</string>    
+    <string name="goal">To Goal:</string>
+    
+	<string name="newPuzzle">New Puzzle</string>
+    <string name="solve">Solve!</string>
+    <string name="skipAhead">Skip Ahead</string>
+
+    <string name="win">You Win!</string>
+    
+</resources>
