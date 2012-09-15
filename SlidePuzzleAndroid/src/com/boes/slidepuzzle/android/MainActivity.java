@@ -43,6 +43,8 @@ public class MainActivity extends Activity {
 	protected void onDestroy() {
 		Log.d(TAG, "Destroying activity...");
 		super.onDestroy();
-	}	
+	}
+	
+	// Test Eclipse put upstream
 	
 }
