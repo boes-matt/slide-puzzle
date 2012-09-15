@@ -1,6 +1,6 @@
 package com.boes.slidepuzzle.android;
 
-import com.boes.slidepuzzle4.R;
+import com.boes.slidepuzzle.android.R;
 
 import android.app.Activity;
 import android.os.Bundle;

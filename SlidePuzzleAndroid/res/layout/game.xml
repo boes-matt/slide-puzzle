@@ -31,7 +31,7 @@
         
     </RelativeLayout>
     
-    <com.boes.slidepuzzle4.BoardView 
+    <com.boes.slidepuzzle.android.BoardView 
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="0dp" 

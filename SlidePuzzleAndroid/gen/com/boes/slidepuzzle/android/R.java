@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.boes.slidepuzzle4;
+package com.boes.slidepuzzle.android;
 
 public final class R {
     public static final class attr {

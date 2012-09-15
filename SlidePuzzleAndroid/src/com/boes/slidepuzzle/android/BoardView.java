@@ -35,7 +35,7 @@ import com.boes.slidepuzzle.model.Board;
 import com.boes.slidepuzzle.model.Move;
 import com.boes.slidepuzzle.model.Move.Action;
 import com.boes.slidepuzzle.model.Path;
-import com.boes.slidepuzzle4.R;
+import com.boes.slidepuzzle.android.R;
 
 public class BoardView extends View implements OnClickListener {
 
