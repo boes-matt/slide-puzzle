@@ -1,7 +1,9 @@
 slide-puzzle
 ============
 
-The classic slide (number) puzzle.  Set up for the 8-puzzle.  Use the backend (SlidePuzzle) to power client apps, or build the Android app (SlidePuzzleAndroid).
+The classic slide (number) puzzle.   
+
+Set up for the 8-puzzle.  Use the backend (SlidePuzzle) to power client apps, or build the Android app (SlidePuzzleAndroid).
 
 SlidePuzzle project structure
 -----------------------------
