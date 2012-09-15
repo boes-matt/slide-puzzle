@@ -1,10 +1,10 @@
 slide-puzzle
 ============
 
-The classic slide (number) puzzle.
+The classic slide (number) puzzle.  Set up for the 8-puzzle.  Use the backend (SlidePuzzle) to power client apps, or build the Android app (SlidePuzzleAndroid).
 
 SlidePuzzle project structure
-=============================
+-----------------------------
 
 The puzzle backend   
 
@@ -15,11 +15,9 @@ The puzzle backend
 See BoardTest class for example usage.   
 
 SlidePuzzleAndroid project structure
-====================================
+------------------------------------
 
 The Android app (frontend)
 
 [com.boes.slidepuzzle.android](https://github.com/boes-matt/slide-puzzle/tree/master/SlidePuzzleAndroid/src/com/boes/slidepuzzle/android): Android activity, BoardView, and helper classes
-
-
 
