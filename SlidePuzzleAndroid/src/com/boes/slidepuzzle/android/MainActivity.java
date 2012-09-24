@@ -1,3 +1,8 @@
+/*
+ * SlidePuzzleAndroid
+ * Copyright (C) 2012 Matt Boes. 
+ */
+
 package com.boes.slidepuzzle.android;
 
 import com.boes.slidepuzzle.android.R;
@@ -44,7 +49,5 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "Destroying activity...");
 		super.onDestroy();
 	}
-	
-	// Test Eclipse put upstream
 	
 }

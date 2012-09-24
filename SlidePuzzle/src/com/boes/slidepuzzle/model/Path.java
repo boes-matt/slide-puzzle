@@ -1,3 +1,8 @@
+/*
+ * SlidePuzzle
+ * Copyright (C) 2012 Matt Boes. 
+ */
+
 package com.boes.slidepuzzle.model;
 
 import java.util.ArrayList;

@@ -1,3 +1,8 @@
+/*
+ * SlidePuzzleAndroid
+ * Copyright (C) 2012 Matt Boes. 
+ */
+
 package com.boes.slidepuzzle.android;
 
 import java.util.HashMap;
