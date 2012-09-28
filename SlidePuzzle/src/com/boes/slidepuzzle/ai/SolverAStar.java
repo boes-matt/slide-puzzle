@@ -41,19 +41,19 @@ public class SolverAStar implements Solver {
 		paths.add(new Path(start));
 		
 		while (!paths.isEmpty()) {
-			Path path = paths.remove();			
+			Path path = paths.remove();
 			Board last = path.getLastBoard();
 			if (last.equals(goal)) return path;
-			for (Entry<Board, Move> successor : successors(last).entrySet()) {
-				Board nextBoard = successor.getKey();
-				if (!visited.contains(nextBoard)) {
-					visited.add(nextBoard);
+			if (!visited.contains(last)) {
+				visited.add(last);
+				for (Entry<Board, Move> successor : successors(last).entrySet()) {
+					Board nextBoard = successor.getKey();
 					Move nextMove = successor.getValue();
 					Path newPath = new Path(path).add(nextMove, nextBoard);
 					newPath.estimatedTotalCostToGoal += heuristic.heuristic(nextBoard);
 					paths.add(newPath);
 				}
-			}
+			}			
 		}
 		return null;
 	}
@@ -66,17 +66,9 @@ public class SolverAStar implements Solver {
 		}
 		return result;
 	}
-	
+
 	@Override
-	public List<Board> generateBoards(int numBoards) {
-		List<Board> boards = new ArrayList<Board>();
-		for (int i = 0; i < numBoards; ++i) {
-			boards.add(generateBoard());
-		}
-		return boards;
-	}
-	
-	private Board generateBoard() {
+	public Board generateBoard() {
 		Board current = goal;
 		int nMoves = (int) (Math.random() * 1000);
 		Set<Board> visited = new HashSet<Board>();
@@ -89,6 +81,15 @@ public class SolverAStar implements Solver {
 			current = (Board) nextBoards[(int) (Math.random() * (nextBoards.length-1))];				
 		}
 		return current;
+	}
+	
+	@Override
+	public List<Board> generateBoards(int numBoards) {
+		List<Board> boards = new ArrayList<Board>();
+		for (int i = 0; i < numBoards; ++i) {
+			boards.add(generateBoard());
+		}
+		return boards;
 	}
 
 }

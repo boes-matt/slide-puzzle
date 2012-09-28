@@ -16,8 +16,8 @@ public class Board {
 	public static final char BLANK = '0';
 
 	// Immutable Board
-	public final String board; // Make board char[] rather than String to speed up?
-	public final int size;
+	public final String board;
+	public final int size; // square of board with borders
 	public final int blankIndex;
 	public final List<Move> validMoves;
 	
@@ -68,7 +68,7 @@ public class Board {
 	public int getIndex(int row, int col) {
 		return (row + 1) * size + col + 1;
 	}
-	
+
 	public int getRow(int boardIndex) {
 		return boardIndex / size - 1;
 	}
@@ -82,7 +82,7 @@ public class Board {
 	}
 	
 	public int getSize() {
-		// size of board without borders
+		// square of board without borders
 		return size - 2;
 	}
 		
@@ -102,16 +102,6 @@ public class Board {
 	
 	@Override
 	public String toString() {
-		// Returns a string of the form "||||| |012| |345| |678| |||||"
-		StringBuffer sb = new StringBuffer(board);
-		for (int i = 1; i < size; i++) {
-			sb.insert(size * i + (i - 1), ' ');			
-		}
-		return sb.toString();
-	}
-	
-	public String getBoardString() {
-		// For restoring Android instance state
 		// Returns a string of the form "012 345 678"
 		StringBuffer sb = new StringBuffer();
 		for (int row = 0; row < getSize(); ++row) {
@@ -122,5 +112,5 @@ public class Board {
 		}
 		return sb.toString();
 	}
-
+	
 }

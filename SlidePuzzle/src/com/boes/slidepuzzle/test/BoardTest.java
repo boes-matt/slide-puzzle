@@ -52,7 +52,7 @@ public class BoardTest extends TestCase {
 		path.add(nextMove, nextBoard);
 		Heuristic naive = new HeuristicNaive(nextBoard); // nextBoard is the goal here
 		path.estimatedTotalCostToGoal += naive.heuristic(nextBoard);
-		Assert.assertEquals("Cost (1, 1) [||||| |012| |345| |678| |||||, (1, 0) LEFT, ||||| |102| |345| |678| |||||]" , path.toString());
+		Assert.assertEquals("Cost (1, 1) [012 345 678, (1, 0) LEFT, 102 345 678]" , path.toString());		
 	}
 	
 	public void testSolve3Puzzle() {
@@ -97,8 +97,8 @@ public class BoardTest extends TestCase {
 		System.out.println("Expected path: " + expected);
 		System.out.println("Actual path:   " + actual);
 		
-		// Compare pathCost rather than paths, because there could be more than one optimal path
-		Assert.assertEquals(expected.pathCost, actual.pathCost); 
+		// Compare numOfMoves rather than paths, because there could be more than one optimal path
+		Assert.assertEquals(expected.getNumOfMoves(), actual.getNumOfMoves()); 
 		System.out.println("passed\n");
 	}
 	
@@ -118,8 +118,8 @@ public class BoardTest extends TestCase {
 		System.out.println("Expected path: " + expected);
 		System.out.println("Actual path:   " + actual);
 		
-		// Compare pathCost rather than paths, because there could be more than one optimal path		
-		Assert.assertEquals(expected.pathCost, actual.pathCost);
+		// Compare numOfMoves rather than paths, because there could be more than one optimal path		
+		Assert.assertEquals(expected.getNumOfMoves(), actual.getNumOfMoves());
 		System.out.println("passed\n");
 	}
 	
@@ -235,6 +235,8 @@ public class BoardTest extends TestCase {
 		System.out.println("TEST 6...");
 		log.printStats();
 		logMemo.printStats();
+		
+		Assert.assertTrue(Log.logDiff(log, logMemo));
 	}
 	
 	public void testSolve8Puzzle7() {
@@ -254,6 +256,57 @@ public class BoardTest extends TestCase {
 		System.out.println("TEST 7...");
 		logManHat.printStats();
 		logMisplaced.printStats();
+		
+		Assert.assertTrue(Log.logDiff(logManHat, logMisplaced));
+	}
+	
+	public void testSolve8Puzzle8() {
+		Board goal = new Board("012 345 678");
+		
+		Heuristic manHat = new HeuristicManhattan(goal);
+		Heuristic misplaced = new HeuristicMisplaced(goal);
+		Log logManHat = new Log("Manhat");
+		Log logMisplaced = new Log("Misplaced");
+		Solver solverManHat = new SolverDebugDecorator(new SolverAStar(goal, manHat), logManHat);
+		Solver solverMisplaced = new SolverDebugDecorator(new SolverAStar(goal, misplaced), logMisplaced);
+		
+		Board start = new Board("532 706 481");
+		solverManHat.shortestPath(start);
+		solverMisplaced.shortestPath(start);
+		
+		Board down = new Board("502 736 481");
+		solverManHat.shortestPath(down);
+		solverMisplaced.shortestPath(down);
+
+		System.out.println("TEST 8...");
+		logManHat.printLog();
+		logMisplaced.printLog();
+		Assert.assertTrue(Log.logDiff(logManHat, logMisplaced));
+	}
+		
+	public void testHeuristicManhattan() {
+		Board goal = new Board("012 345 678");
+		Heuristic manHat = new HeuristicManhattan(goal);
+		
+		// Successors of 532 706 481
+		Board down = new Board("502 736 481");
+		Board up = new Board("532 786 401");
+		Board right = new Board("532 076 481");
+		Board left = new Board("532 760 481");
+		
+		Assert.assertEquals(15, manHat.heuristic(down));
+		Assert.assertEquals(17, manHat.heuristic(up));
+		Assert.assertEquals(15, manHat.heuristic(right));
+		Assert.assertEquals(15, manHat.heuristic(left));
+		
+		// Successors of 502 736 481
+		Board up2 = new Board("532 706 481");
+		Board right2 = new Board("052 736 481");
+		Board left2 = new Board("520 736 481");
+
+		Assert.assertEquals(16, manHat.heuristic(up2));
+		Assert.assertEquals(14, manHat.heuristic(right2));
+		Assert.assertEquals(16, manHat.heuristic(left2));
 	}
 	
 }

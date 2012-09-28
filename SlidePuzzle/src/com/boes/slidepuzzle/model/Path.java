@@ -11,8 +11,8 @@ import java.util.List;
 public class Path implements Comparable<Path> {
 
 	// A path is of the form [Board, Move, Board, ...] 
-	public final List<Object> path;
-	public int pathCost;
+	private final List<Object> path;
+	private int pathCost;
 	public int estimatedTotalCostToGoal;
 	
 	public Path(Board start) {
@@ -50,7 +50,7 @@ public class Path implements Comparable<Path> {
 	}
 
 	public int getNumOfMoves() {
-		return (path.size() - 1) / 2;
+		return pathCost;
 	}
 	
 	@Override

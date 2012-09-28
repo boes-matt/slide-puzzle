@@ -32,6 +32,11 @@ public class SolverMemoDecorator implements Solver {
 	}
 
 	@Override
+	public Board generateBoard() {
+		return solver.generateBoard();
+	}
+	
+	@Override
 	public List<Board> generateBoards(int numBoards) {
 		return solver.generateBoards(numBoards);
 	}

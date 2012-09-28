@@ -15,22 +15,14 @@ public class HeuristicMisplaced extends Heuristic {
 
 	@Override
 	public int heuristic(Board current) {
-		int colStart = 1;
-		int colEndExclusive = current.size - 1;
 		int sum = 0;
-		
-		for (int rowNum = 1; rowNum < current.size - 1; ++rowNum) {
-			int rowOffset = rowNum * current.size;
-			for (int col = colStart; col < colEndExclusive; ++col) {
-				int index = rowOffset + col;
-				char boardPiece = current.board.charAt(index);
-				if (boardPiece != Board.BLANK) {
-					char goalPiece = goal.board.charAt(index);
-					if (boardPiece != goalPiece) sum += 1;
-				}
+		for (int row = 0; row < current.getSize(); ++row) {
+			for (int col = 0; col < current.getSize(); ++col) {
+				char piece = current.getChar(row, col);
+				if (piece != Board.BLANK && piece != goal.getChar(row, col)) sum += 1;
 			}
 		}	
-		return sum;	
+		return sum;
 	}
-
+	
 }

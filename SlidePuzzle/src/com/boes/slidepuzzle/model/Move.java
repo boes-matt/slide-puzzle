@@ -11,8 +11,8 @@ public class Move {
 	
 	public final int fromIndex;
 	public final Action action;
-	private final int boardSize; // used in toString()
-		
+	private final Board fromBoard; // used in toString()
+			
 	public Move(Board fromBoard, Action action) {
 		switch (action) {
 		case RIGHT: fromIndex = fromBoard.blankIndex - 1; break;
@@ -22,7 +22,7 @@ public class Move {
 		default: fromIndex = -1;
 		}
 		this.action = action;
-		boardSize = fromBoard.size;
+		this.fromBoard = fromBoard;
 	}
 	
 	@Override
@@ -34,8 +34,8 @@ public class Move {
 	@Override
 	public String toString() {
 		// Returns a string of the form "(0, 0) RIGHT"
-		int row = (fromIndex / boardSize) - 1;
-		int col = (fromIndex % boardSize) - 1;
+		int row = fromBoard.getRow(fromIndex);
+		int col = fromBoard.getCol(fromIndex);
 		StringBuilder result = new StringBuilder();
 		result.append("(").append(col).append(", ").append(row).append(") ").append(action);
 		return result.toString();

@@ -14,30 +14,23 @@ public class HeuristicManhattan extends Heuristic {
 	}
 	
 	@Override
-	public int heuristic(Board current) {		
-		int colStart = 1;
-		int colEndExclusive = current.size - 1;
+	public int heuristic(Board current) {
 		int sum = 0;
-		
-		for (int rowNum = 1; rowNum < current.size - 1; ++rowNum) {
-			int rowOffset = rowNum * current.size;
-			for (int col = colStart; col < colEndExclusive; ++col) {
-				int boardIndex = rowOffset + col;
-				char piece = current.board.charAt(boardIndex);
+		for (int row = 0; row < current.getSize(); ++row) {
+			for (int col = 0; col < current.getSize(); ++col) {
+				char piece = current.getChar(row, col);
 				if (piece != Board.BLANK) {
-					// May need faster lookup here!  Create goal hash map in constructor?
-					int goalIndex = goal.board.indexOf(piece);
-					sum += getDistance(boardIndex, goalIndex, current.size);
+					// Use goalMap to speed up lookups from O(n) to O(1)
+					int goalIndex = goalMap.get(piece);
+					int goalRow = goal.getRow(goalIndex);
+					int goalCol = goal.getCol(goalIndex);
+					int x = Math.abs(col - goalCol);
+					int y = Math.abs(row - goalRow);					
+					sum += x + y;
 				}
 			}
-		}	
+		}
 		return sum;
-	}
-	
-	private int getDistance(int boardIndex, int goalIndex, int size) {
-		int x = Math.abs((boardIndex / size) - (goalIndex / size));
-		int y = Math.abs((boardIndex % size) - (goalIndex % size));
-		return x + y;
 	}
 
 }

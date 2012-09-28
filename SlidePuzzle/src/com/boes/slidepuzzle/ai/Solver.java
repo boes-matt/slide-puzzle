@@ -13,6 +13,7 @@ import com.boes.slidepuzzle.model.Path;
 public interface Solver {
 
 	public Path shortestPath(Board start);
+	public Board generateBoard();
 	public List<Board> generateBoards(int numBoards);
 	
 }

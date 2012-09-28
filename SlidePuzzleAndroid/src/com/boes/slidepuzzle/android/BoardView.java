@@ -88,7 +88,8 @@ public class BoardView extends View implements OnClickListener {
 		
 		goal = new Board("012 345 678");
 		solver = new SolverMemoDecorator(new SolverAStar(goal, new HeuristicManhattan(goal)));
-		board = generateBoard(solver);
+		board = solver.generateBoard();
+		//board = new Board("532 706 481");
 		moves = -1;			
 		
 		solving = 0;
@@ -273,7 +274,7 @@ public class BoardView extends View implements OnClickListener {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				shortestPath = solver.shortestPath(board);
+				shortestPath = solver.shortestPath(board);				
 				goalView.post(new Runnable() {
 					@Override
 					public void run() {
@@ -296,7 +297,4 @@ public class BoardView extends View implements OnClickListener {
 		moveView.setText(message);
 	}
 	
-	private Board generateBoard(Solver solver) {
-		return solver.generateBoards(1).get(0);
-	}
 }

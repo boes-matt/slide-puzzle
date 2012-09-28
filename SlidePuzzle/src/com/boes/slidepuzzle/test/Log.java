@@ -5,8 +5,10 @@
 
 package com.boes.slidepuzzle.test;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -53,6 +55,69 @@ public class Log {
 		System.out.println(name + " stats for " + paths.size() + " test boards:");
 		printTimes();
 		printNumOfMoves();
+	}
+	
+	public static boolean logDiff(Log logA, Log logB) {
+		/*
+		 * This function adds the paths from logA to a hashtable for each start board,
+		 * and then subsequently removes those paths from the hashtable
+		 * if a path of the same length (i.e. moves) exists in logB
+		 * for that particular start board.
+		 * 
+		 * If not, the path from logB of differing length is added to the hashtable
+		 * under that start board for comparison purposes.  
+		 * 
+		 * Useful when comparing the results of different solvers.
+		 */
+		
+		Map<Board, List<Path>> startBoards = new HashMap<Board, List<Path>>();
+		
+		// Add boards to hashtable
+		for (Entry<Object[], Path> entry : logA.paths.entrySet()) {
+			Board boardA = (Board) entry.getKey()[0];
+			Path pathA = entry.getValue();
+			
+			if (startBoards.containsKey(boardA)) startBoards.get(boardA).add(pathA);
+			else {
+				List<Path> pathsA = new ArrayList<Path>();
+				pathsA.add(pathA);
+				startBoards.put(boardA, pathsA);
+			}
+		}
+		
+		// Remove matches from hashtable
+		for (Entry<Object[], Path> entry : logB.paths.entrySet()) {
+			Board boardB = (Board) entry.getKey()[0];
+			Path pathB = entry.getValue();
+			
+			if (startBoards.containsKey(boardB)) {
+				List<Path> pathsA = startBoards.get(boardB);
+				int moves = pathsA.get(0).getNumOfMoves();
+				
+				if (pathB.getNumOfMoves() == moves) {
+					if (pathsA.size() > 1) pathsA.remove(0);
+					else startBoards.remove(boardB);					
+				} else pathsA.add(pathB);
+			} else {
+				List<Path> pathsB = new ArrayList<Path>();
+				pathsB.add(pathB);
+				startBoards.put(boardB, pathsB);				
+			}
+		}
+		
+		System.out.println("Log diff:");
+		if (startBoards.isEmpty()) {
+			System.out.println("Logs match!");
+			System.out.println();
+			return true;
+		} else {
+			for (Entry<Board, List<Path>> entry : startBoards.entrySet()) {
+				System.out.println("Board: " + entry.getKey());
+				for (Path path : entry.getValue()) System.out.println("Path: " + path);
+				System.out.println();
+			}
+			return false;
+		}
 	}
 
 	public void printNumOfMoves() {
