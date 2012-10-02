@@ -61,7 +61,8 @@ public class Piece {
 	
 	@Override
 	public boolean equals(Object other) {
-		return ((Piece) other).id.equals(id);
+		if (other == null) return false;
+		else return ((Piece) other).id.equals(id);
 	}
 	
 }
