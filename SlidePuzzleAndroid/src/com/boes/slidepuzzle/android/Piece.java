@@ -1,6 +1,7 @@
 /*
  * SlidePuzzleAndroid
- * Copyright (C) 2012 Matt Boes. 
+ * Copyright (C) 2012 Matt Boes.
+ * All rights reserved.
  */
 
 package com.boes.slidepuzzle.android;

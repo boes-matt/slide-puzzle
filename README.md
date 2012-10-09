@@ -1,9 +1,9 @@
 Matts Slide Puzzle
 ==================
 
-This program is an implementation of the classic slide (number) puzzle.   
+This program is an implementation of the classic slide number puzzle.   
 
-Copyright (C) 2012 Matt Boes.
+Copyright (C) 2012 Matt Boes.  All rights reserved.
 
 SlidePuzzle project structure
 -----------------------------
@@ -19,4 +19,4 @@ SlidePuzzleAndroid project structure
 
 The Android app (frontend)
 
-[com.boes.slidepuzzle.android](https://github.com/boes-matt/slide-puzzle/tree/master/SlidePuzzleAndroid/src/com/boes/slidepuzzle/android): Android activity, BoardView, and helper classes
+[com.boes.slidepuzzle.android](https://github.com/boes-matt/slide-puzzle/tree/master/SlidePuzzleAndroid/src/com/boes/slidepuzzle/android): Android activity, BoardView, and other classes

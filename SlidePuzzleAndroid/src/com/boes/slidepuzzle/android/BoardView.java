@@ -1,6 +1,7 @@
 /*
  * SlidePuzzleAndroid
- * Copyright (C) 2012 Matt Boes. 
+ * Copyright (C) 2012 Matt Boes.
+ * All rights reserved. 
  */
 
 package com.boes.slidepuzzle.android;
@@ -17,14 +18,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.view.animation.Interpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Toast;
 
 import com.boes.slidepuzzle.model.Board;
 import com.boes.slidepuzzle.model.Move;
@@ -38,8 +37,9 @@ public class BoardView extends View implements OnClickListener {
 	private MainActivity game;
 
 	private Board board;
-	private int moves;
+	protected int moves;
 	private Path shortestPath;
+	protected int perfectPlay = -1; // move benchmark set on first call to updateAI
 	private final float playerDuration = 300; // Piece animation duration on player touch.
 
 	private Map<Character, Piece> pieces;
@@ -131,10 +131,14 @@ public class BoardView extends View implements OnClickListener {
 			if (an.isAnimating()) invalidate(dirty);
 			else {
 				// Redraw board on animation end.  Fixes case when quick moves leave board incompletely drawn.
-				touched = null; invalidate(dirty);
+				touched = null;
+				invalidate(dirty);
 				
 				if (solving > 0) onTouchEvent(cpuTouch);
-				else an.setDuration(playerDuration);
+				else {
+					checkWin();
+					an.setDuration(playerDuration);
+				}
 			}
 		}
 	}
@@ -152,7 +156,7 @@ public class BoardView extends View implements OnClickListener {
 		} else if (solving == 0) { 
 			col = (int) (event.getX() / Piece.width);
 			row = (int) (event.getY() / Piece.height);
-		// If AI is animating solution but event is a player touch, then ignore and return.
+		// If AI is animating solution but event is a player touch, then ignore event and return.
 		} else return true;
 		
 		switch (event.getActionMasked()) {
@@ -176,7 +180,6 @@ public class BoardView extends View implements OnClickListener {
 				an.start();
 				updateMoves();
 				updateAI();
-				checkWin();
 				invalidate(dirty);
 			}
 			return true;
@@ -190,15 +193,7 @@ public class BoardView extends View implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.newPuzzle:
 			pause();
-			game.boardView = new BoardView(game);
-			game.setupBoardView();
-			this.startAnimation(game.outBoard);
-			game.boardView.startAnimation(game.inBoard);
-			
-			ViewGroup parent = (ViewGroup) getParent();
-			int index = parent.indexOfChild(this);
-			parent.removeView(this);
-			parent.addView(game.boardView, index, getLayoutParams());				
+			newPuzzle();
 			break;
 		case R.id.solve:
 			moveAhead(shortestPath.getNumOfMoves());
@@ -209,7 +204,23 @@ public class BoardView extends View implements OnClickListener {
 		}
 	}
 	
+	public void newPuzzle() {
+		game.boardView = new BoardView(game);
+		game.setupBoardView();
+		this.startAnimation(game.outBoard);
+		game.boardView.startAnimation(game.inBoard);
+		
+		ViewGroup parent = (ViewGroup) getParent();
+		int index = parent.indexOfChild(this);
+		parent.removeView(this);
+		parent.addView(game.boardView, index, getLayoutParams());		
+	}
+	
 	private void moveAhead(int moves) {
+		Log.d(TAG, "moveAhead: moves = " + moves);
+		Log.d(TAG, "moveAhead: shortestPath = " + shortestPath);
+		Log.d(TAG, "moveAhead: solving = " + solving);
+
 		if (shortestPath != null && solving == 0 && shortestPath.getNumOfMoves() > 0) {
 			solving = Math.min(moves, shortestPath.getNumOfMoves());
 			an.setDuration(aiDuration);
@@ -223,20 +234,17 @@ public class BoardView extends View implements OnClickListener {
 	}
 	
 	private void checkWin() {
-		if (board.equals(game.goal)) {
-			Toast toast = Toast.makeText(game, R.string.win, Toast.LENGTH_SHORT);
-			toast.setGravity(Gravity.CENTER, 0, 0);
-			toast.show();
-		}
+		if (board.equals(game.goal)) game.showMyDialog(MainActivity.DIALOG_WIN);
 	}
 	
 	private void updateAI() {
 		if (solving > 0) setGoalText();
-		// TODO: Interrupt previous thread before calling new thread?  Case when player moves are faster than solver.
+		// TODO: Interrupt previous thread before calling new thread?  For when player moves are faster than solver.
 		else new Thread(new Runnable() {
 			@Override
 			public void run() {
-				shortestPath = game.solver.shortestPath(board);				
+				shortestPath = game.solver.shortestPath(board);
+				if (perfectPlay == -1) perfectPlay = shortestPath.getNumOfMoves();
 				game.goalView.post(new Runnable() {
 					@Override
 					public void run() { setGoalText(); }
