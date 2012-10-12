@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="LightCyan">#3BF6E8</color>
+	<color name="Cyan">#2EC3B7</color>
+	<color name="DarkCyan">#3F7672</color>
+	<color name="DarkBlue">#1C766F</color>
+	<color name="MidnightBlue">#191970</color>
+	<color name="Orange">#FFA500</color>
+	<color name="DarkOrange">#FF8C00</color>
+	<color name="SandyBrown">#F4A460</color>
+	<color name="RosyBrown">#BC8F8F</color>
+	<color name="Brown">#A52A2A</color>
+	<color name="Black">#000000</color>
+	<color name="Blue">#0000FF</color>
+	<color name="BlueViolet">#8A2BE2</color>
+	<color name="AnotherDarkBlue">#00008B</color>
+	
+	<color name="MyBlue">#006E83</color>
+	<color name="MyDarkBlue">#004958</color>
+	<color name="MyOrange">#EAA000</color>
+	<color name="MyLightOrange">#EEB947</color>
+	<color name="MyOtherOrange">#C49000</color>
+	<color name="MyBrown">#443714</color>
+</resources>

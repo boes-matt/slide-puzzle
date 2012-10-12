@@ -14,12 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/titleFontSize"
-        android:text="@string/title" />
+        android:textColor="@color/Black"
+        android:text="@string/title"
+        android:background="@drawable/title_bar"
+        android:padding="@dimen/padding_medium" />
     
     <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
+        android:layout_height="wrap_content"
+        android:background="@drawable/stat_bar"
+        android:paddingLeft="@dimen/padding_medium"
+        android:paddingRight="@dimen/padding_medium" >
+                
 	    <TextView 
 	        android:id="@+id/moves"
 	        android:layout_width="wrap_content"
@@ -45,7 +51,9 @@
     
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bar"
+        android:paddingTop="@dimen/padding_small" >
 		
         <Button
             android:id="@+id/newPuzzle"

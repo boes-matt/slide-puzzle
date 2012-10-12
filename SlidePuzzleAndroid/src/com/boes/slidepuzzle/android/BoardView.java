@@ -92,6 +92,7 @@ public class BoardView extends View implements OnClickListener {
 	
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		Piece.game = game;
 		Piece.width = w / (float) board.getSize();
 		Piece.height = h / (float) board.getSize();
 		

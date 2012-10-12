@@ -29,5 +29,5 @@ public class AboutFragment extends DialogFragment {
 						}
 				).create();
 	}
-	
+
 }

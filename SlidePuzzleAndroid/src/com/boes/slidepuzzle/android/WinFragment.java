@@ -19,7 +19,6 @@ public class WinFragment extends DialogFragment {
 	 * You Win!
 	 * Now, how hard was that?
 	 * You solved a 22-move puzzle in 100 moves. 1/4 Stars!
-	 * Nice work! Can you do better?
 	 * (P) New Puzzle (N) Close
 	 */
 	
@@ -60,11 +59,8 @@ public class WinFragment extends DialogFragment {
 		  .append(game.boardView.moves)
 		  .append(" moves.  ")
 		  .append(calculateStars(game.boardView.moves, game.boardView.perfectPlay))
-		  .append("/4 Stars!")
-		  .append("\n\n");
+		  .append("/4 Stars!");
 		
-		sb.append("Nice work!  Can you do better?");
-				
 		return sb.toString();
 	}
 	
