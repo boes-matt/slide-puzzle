@@ -18,7 +18,7 @@
     <string name="win">You Win!</string>
     
     <string name="about_label">About</string>
- 	<string name="about_text">Order the tiles 1 through 8, with the BLANK in the bottom right hand corner.\n\nTap the solve button to see it in action.\n\nThere are over 180,000 possible puzzles, ranging 0-31 moves away from the goal.\n\n<b>Happy puzzling!</b>\n\nCopyright (C) 2012 Matt Boes.  All rights reserved.</string>
+ 	<string name="about_text">Order the tiles 1 through 8, with the BLANK in the bottom right hand corner.\n\nTap the solve button to see it in action.\n\nThere are over 180,000 possible puzzles, ranging 0-31 moves away from the goal.\n\n<b>Happy puzzling!</b>\n\nCopyright &#169; 2012 Matt Boes.  All rights reserved.</string>
  	<string name="play">Play!</string>
  	
  	<string name="close">Close</string>

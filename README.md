@@ -3,7 +3,7 @@ Matts Slide Puzzle
 
 This program is an implementation of the classic slide number puzzle.   
 
-Copyright (C) 2012 Matt Boes.  All rights reserved.
+Copyright &#169; 2012 Matt Boes.  All rights reserved.
 
 SlidePuzzle project structure
 -----------------------------
