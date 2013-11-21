@@ -2,7 +2,7 @@
 
 Matts Slide Puzzle is an implementation of the classic slide puzzle or 8-puzzle. Order the tiles 1 through 8, with the BLANK in the bottom right hand corner.
 
-  * Game in [Android Play](https://play.google.com/store/apps/details?id=com.boes.slidepuzzle.android) market
+  * Game in the [Android Play](https://play.google.com/store/apps/details?id=com.boes.slidepuzzle.android) market
   * Coded solver using A* search algorithm to assist gameplay
   * Custom board view, and animation support for Froyo and Gingerbread
   * Over 180,000 possible puzzles, ranging 0-31 moves away from the goal.
