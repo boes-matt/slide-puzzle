@@ -7,9 +7,9 @@ Matts Slide Puzzle is an implementation of the classic slide puzzle or 8-puzzle.
   * Custom board view, and animation support for Froyo and Gingerbread
   * Over 180,000 possible puzzles, ranging 0-31 moves away from the goal.
 
-<img src="http://i.imgur.com/zeFmmYm.png" height="545" />
+<img src="https://raw.github.com/boes-matt/slide-puzzle/master/screenshots/unsolved.png" height="545" />
 &nbsp;&nbsp;
-<img src="http://i.imgur.com/GlXlQ57.png" height="545" />
+<img src="https://raw.github.com/boes-matt/slide-puzzle/master/screenshots/youwin.png" height="545" />
 
 ## SlidePuzzle project structure
 
